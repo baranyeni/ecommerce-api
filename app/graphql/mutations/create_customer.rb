@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   class CreateCustomer < BaseMutation
     argument :first_name, String, required: true
@@ -11,9 +13,9 @@ module Mutations
     def resolve(first_name: nil, last_name: nil, email: nil, phone_number: nil)
       customer = Customer.new(first_name: first_name, last_name: last_name, email: email, phone_number: phone_number)
       if customer.save
-        {customer: customer, errors: []}
+        { customer: customer, errors: [] }
       else
-        {customer: nil, errors: customer.errors.full_messages}
+        { customer: nil, errors: customer.errors.full_messages }
       end
     end
   end

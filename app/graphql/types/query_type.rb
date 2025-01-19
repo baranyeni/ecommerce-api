@@ -25,5 +25,14 @@ module Types
     def customers
       Customer.all
     end
+
+    field :customer, Types::CustomerType, null: true do
+      description "Retrieve a customer by ID"
+      argument :id, ID, required: true
+    end
+
+    def customer(id:)
+      Customer.find(id)
+    end
   end
 end
