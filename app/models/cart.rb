@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Cart < ApplicationRecord
+  include ShippingCalculable
   include CartCalculations
 
   enum status: { active: 0, processing: 1, returned: 2, canceled: 3, completed: 4 }.freeze

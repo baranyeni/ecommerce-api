@@ -9,10 +9,6 @@ module CartCalculations
     subtotal * 0.2
   end
 
-  def shipping_cost
-    ShippingCalculator.new(self).calculate
-  end
-
   def total_price
     subtotal + tax_amount + shipping_cost
   end
