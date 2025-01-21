@@ -10,5 +10,17 @@ module Types
     field :password, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    field :active_cart, Types::CartType, null: true
+    field :carts, [Types::CartType], null: false
+    field :cart_items, [Types::CartItemType], null: false
+
+    def active_cart
+      object.carts.active.first
+    end
+
+    def cart_items
+      active_cart&.cart_items || []
+    end
   end
 end

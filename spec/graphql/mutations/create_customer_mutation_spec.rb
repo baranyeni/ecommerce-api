@@ -26,9 +26,7 @@ RSpec.describe 'Customer Mutation', type: :request do
       GRAPHQL
 
       post '/graphql', params: { query: query }
-
-      json = JSON.parse(response.body)
-      errors = json['data']['createCustomer']['errors']
+      errors = JSON.parse(response.body)['data']['createCustomer']['errors']
 
       expect(response).to have_http_status(:ok)
       expect(errors).to include(error_message)
@@ -46,9 +44,7 @@ RSpec.describe 'Customer Mutation', type: :request do
       GRAPHQL
 
       post '/graphql', params: { query: query }
-
-      json = JSON.parse(response.body)
-      data = json['data']['createCustomer']['customer']
+      data = JSON.parse(response.body)['data']['createCustomer']['customer']
 
       expect(response).to have_http_status(:ok)
       %w[firstName lastName email phoneNumber].each do |key|

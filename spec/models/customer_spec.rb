@@ -10,6 +10,22 @@ RSpec.describe Customer, type: :model do
     { first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', phone_number: '+1234567890' }
   end
 
+  describe 'associations' do
+    let(:customer) { create(:customer) }
+
+    it 'has many carts' do
+      cart1 = create(:cart, customer: customer)
+      cart2 = create(:cart, customer: customer)
+
+      expect(customer.carts).to include(cart1, cart2)
+    end
+
+    it 'has one active cart' do
+      cart = create(:cart, customer: customer)
+      expect(customer.active_cart).to eq(cart)
+    end
+  end
+
   describe 'validations' do
     it 'is valid with valid attributes' do
       customer = Customer.new(valid_attributes)

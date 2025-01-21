@@ -2,37 +2,16 @@
 
 module Types
   class QueryType < Types::BaseObject
-    field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
-      argument :id, ID, required: true, description: "ID of the object."
-    end
+    # Add Relay Node interface
+    include GraphQL::Types::Relay::HasNodeField
+    include GraphQL::Types::Relay::HasNodesField
 
-    def node(id:)
-      context.schema.object_from_id(id, context)
-    end
+    # Customer
+    field :customer, resolver: Queries::Customers::FetchCustomer
 
-    field :nodes, [Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ID], required: true, description: "IDs of the objects."
-    end
+    # Products
+    field :products, resolver: Queries::Products::FetchProducts
+    field :product, resolver: Queries::Products::FetchProduct
 
-    def nodes(ids:)
-      ids.map { |id| context.schema.object_from_id(id, context) }
-    end
-
-    field :customers, [Types::CustomerType], null: false do
-      description "Retrieve all customers"
-    end
-
-    def customers
-      Customer.all
-    end
-
-    field :customer, Types::CustomerType, null: true do
-      description "Retrieve a customer by ID"
-      argument :id, ID, required: true
-    end
-
-    def customer(id:)
-      Customer.find(id)
-    end
   end
 end

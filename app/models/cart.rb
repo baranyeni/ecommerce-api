@@ -13,7 +13,6 @@ class Cart < ApplicationRecord
   validates :customer, presence: true
   validates :status, presence: true, inclusion: { in: statuses.keys }
 
-
   scope :active, -> { where(status: :active) }
   scope :completed, -> { where(status: :completed) }
   scope :abandoned, -> { where(status: :abandoned) }
