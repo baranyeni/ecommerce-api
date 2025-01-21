@@ -16,7 +16,7 @@ RSpec.describe Order, type: :model do
       it 'requires customer' do
         order.customer = nil
         expect(order).not_to be_valid
-        expect(order.errors[:customer]).to include("must exist")
+        expect(order.errors[:customer]).to include('must exist')
       end
     end
 
@@ -24,7 +24,7 @@ RSpec.describe Order, type: :model do
       it 'validates total price is greater than 0' do
         order.total_price = 0
         expect(order).not_to be_valid
-        expect(order.errors[:total_price]).to include("must be greater than 0")
+        expect(order.errors[:total_price]).to include('must be greater than 0')
       end
     end
 

@@ -9,8 +9,7 @@ FactoryBot.define do
       order.order_items << build(:order_item,
                                  order: order,
                                  product: product,
-                                 quantity: 25
-      )
+                                 quantity: 25)
 
       order.total_price = order.order_items.sum { |item| item.quantity * item.product.price }
     end

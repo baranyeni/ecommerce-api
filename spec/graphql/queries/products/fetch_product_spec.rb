@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'FetchProduct Query', type: :request do
   let!(:product) { create(:product) }
-  
+
   let(:query) do
     <<-GRAPHQL
       query { product(id: "#{product.id}") { id name description price stockCount } }
@@ -36,4 +36,4 @@ RSpec.describe 'FetchProduct Query', type: :request do
       expect(query_response).to be_nil
     end
   end
-end 
+end

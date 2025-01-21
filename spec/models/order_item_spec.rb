@@ -22,7 +22,7 @@ RSpec.describe OrderItem, type: :model do
       it 'must be greater than 0' do
         order_item.quantity = 0
         expect(order_item).not_to be_valid
-        expect(order_item.errors[:quantity]).to include("must be greater than 0")
+        expect(order_item.errors[:quantity]).to include('must be greater than 0')
       end
     end
   end

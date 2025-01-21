@@ -6,6 +6,7 @@ module Orders
   class CreateFromCart
     def initialize(cart)
       @cart = cart
+      @order = nil
     end
 
     def call
@@ -14,19 +15,26 @@ module Orders
 
       ActiveRecord::Base.transaction do
         @cart.move_to_processing!
-        order = create_order_with_items
-        return failure("Cannot process payment") unless order.can_move_to_in_payment?
+        @order = create_order_with_items
+        return failure("Cannot process payment") unless @order.can_move_to_in_payment?
+
+        process_payment
         reserve_stocks
-        
+
         @cart.move_to_completed!
-        success(order)
+        success(@order)
       end
     rescue ActiveRecord::RecordInvalid => e
-      @cart.move_to_active! if @cart.processing?
+      failure(e.message)
+    rescue => e
       failure(e.message)
     end
 
     private
+
+    def process_payment
+      Payments::ProcessPayment.new(order: @order).call
+    end
 
     def stock_available?
       @cart.cart_items.all? do |item|
@@ -58,6 +66,8 @@ module Orders
     end
 
     def failure(message)
+      @cart.move_to_active!
+
       ServiceResult.new(success: false, error: message)
     end
   end

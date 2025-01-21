@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'ManageCartItem Mutation', type: :request do
   let(:customer) { create(:customer) }
   let(:product) { create(:product, stock_count: 5) }
-  
+
   let(:query) do
     <<-GRAPHQL
       mutation {
@@ -51,9 +51,9 @@ RSpec.describe 'ManageCartItem Mutation', type: :request do
     let(:quantity) { 0 }
 
     it 'removes cart item' do
-      expect {
+      expect do
         post '/graphql', params: { query: query }
-      }.to change(CartItem, :count).by(-1)
+      end.to change(CartItem, :count).by(-1)
 
       data = JSON.parse(response.body)['data']['manageCartItem']
 
@@ -100,4 +100,4 @@ RSpec.describe 'ManageCartItem Mutation', type: :request do
       expect(data['errors']).to include('Customer not found')
     end
   end
-end 
+end

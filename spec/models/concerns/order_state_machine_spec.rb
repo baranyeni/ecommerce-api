@@ -87,7 +87,7 @@ RSpec.describe OrderStateMachine do
     end
 
     context 'when moving to in_shipment' do
-      before do 
+      before do
         order.update!(status: :in_payment)
       end
 
@@ -97,4 +97,4 @@ RSpec.describe OrderStateMachine do
       end
     end
   end
-end 
+end

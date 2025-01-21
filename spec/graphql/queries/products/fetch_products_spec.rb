@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'FetchProducts Query', type: :request do
   let!(:products) { create_list(:product, 3) }
-  
+
   let(:query) do
     <<-GRAPHQL
       query {
@@ -20,7 +20,7 @@ RSpec.describe 'FetchProducts Query', type: :request do
 
     expect(query_response.length).to eq(3)
     expect(query_response.first.keys).to match_array(%w[id name description price stockCount])
-    
+
     first_product = products.first
     first_response = query_response.first
     expect(first_response['id']).to eq(first_product.id.to_s)
@@ -32,7 +32,7 @@ RSpec.describe 'FetchProducts Query', type: :request do
 
   context 'with pagination' do
     let!(:additional_products) { create_list(:product, 2) }
-    
+
     let(:query_with_pagination) do
       <<-GRAPHQL
         query {
@@ -60,4 +60,4 @@ RSpec.describe 'FetchProducts Query', type: :request do
       expect(query_response).to be_empty
     end
   end
-end 
+end

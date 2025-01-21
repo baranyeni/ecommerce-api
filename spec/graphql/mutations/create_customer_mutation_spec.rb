@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Customer Mutation', type: :request do
-  let(:params) do {
+  let(:params) do
+    {
       firstName: 'John',
       lastName: 'Doe',
       email: 'john_doe@example.com',

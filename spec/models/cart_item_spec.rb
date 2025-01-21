@@ -20,7 +20,7 @@ RSpec.describe CartItem, type: :model do
       it 'must be greater than 0' do
         cart_item.quantity = 0
         expect(cart_item).not_to be_valid
-        expect(cart_item.errors[:quantity]).to include("must be greater than 0")
+        expect(cart_item.errors[:quantity]).to include('must be greater than 0')
       end
     end
 
@@ -28,13 +28,13 @@ RSpec.describe CartItem, type: :model do
       it 'requires cart' do
         cart_item.cart = nil
         expect(cart_item).not_to be_valid
-        expect(cart_item.errors[:cart]).to include("must exist")
+        expect(cart_item.errors[:cart]).to include('must exist')
       end
 
       it 'requires product' do
         cart_item.product = nil
         expect(cart_item).not_to be_valid
-        expect(cart_item.errors[:product]).to include("must exist")
+        expect(cart_item.errors[:product]).to include('must exist')
       end
     end
   end
