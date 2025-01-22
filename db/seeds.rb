@@ -36,6 +36,10 @@ Customer.all.each do |customer|
   end
 end
 
-Orders::CreateFromCart.new(Cart.all.sample).call
+Orders::CreateFromCart.new(
+  Customer.first.carts.first
+).call
+
+Order.all.last.update!(status: 'in_shipment')
 
 puts "Seed data created successfully!"
