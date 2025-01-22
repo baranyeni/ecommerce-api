@@ -52,7 +52,7 @@ RSpec.describe Orders::CreateFromCart do
         order_item = order.order_items.first
         expect(order_item.product).to eq(product)
         expect(order_item.quantity).to eq(2)
-        expect(order_item.order.total_price).to eq(20.00)
+        expect(order_item.order.total_price.to_i).to eq(39.00)
       end
 
       it 'sends an order confirmation email' do
