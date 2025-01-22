@@ -23,6 +23,9 @@ module Orders
 
         @cart.move_to_completed!
         @order.move_to_in_shipment!
+
+        OrderMailerJob.perform_later(@order, :send_successful_order_email)
+
         success(@order)
       end
     rescue ActiveRecord::RecordInvalid => e

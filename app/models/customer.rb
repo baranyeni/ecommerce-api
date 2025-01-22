@@ -10,4 +10,8 @@ class Customer < ApplicationRecord
   has_one :active_cart, -> { where(status: :active) }, class_name: 'Cart'
 
   has_many :orders
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

@@ -55,6 +55,13 @@ RSpec.describe Orders::CreateFromCart do
         expect(order_item.order.total_price).to eq(20.00)
       end
 
+      it 'sends an order confirmation email' do
+        expect {
+          service.call
+          Sidekiq::Worker.drain_all
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
       it 'reserves product stock' do
         expect do
           service.call
