@@ -2,10 +2,14 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: ecommerce_api
+  password: password
+  host: db
 
 development:
   <<: *default
   database: ecommerce_api_development
+
 test:
   <<: *default
   database: ecommerce_api_test
