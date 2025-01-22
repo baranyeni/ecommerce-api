@@ -7,6 +7,7 @@ ruby '2.7.8'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'concurrent-ruby', '1.3.4'
+gem 'ffi', '< 1.17.0'
 gem 'graphql', '~> 2.4'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
