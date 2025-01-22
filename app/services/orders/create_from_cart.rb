@@ -55,7 +55,7 @@ module Orders
         customer: @cart.customer,
         status: :active,
         order_items_attributes: order_items_attributes,
-        total_price: @cart.cart_items.sum { |ci| ci.quantity * ci.product.price }
+        total_price: @cart.total_price
       )
     end
 
