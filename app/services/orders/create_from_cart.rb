@@ -22,6 +22,7 @@ module Orders
         reserve_stocks
 
         @cart.move_to_completed!
+        @order.move_to_in_shipment!
         success(@order)
       end
     rescue ActiveRecord::RecordInvalid => e

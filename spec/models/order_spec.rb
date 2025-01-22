@@ -76,7 +76,7 @@ RSpec.describe Order, type: :model do
 
     describe '#total_price' do
       it 'calculates total price correctly' do
-        expect(order.total_price.to_i).to eq(55.0)
+        expect(order.current_total_price.to_i).to eq(55.0)
       end
     end
   end

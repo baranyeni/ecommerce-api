@@ -14,6 +14,7 @@ module Types
     field :active_cart, Types::CartType, null: true
     field :carts, [Types::CartType], null: false
     field :cart_items, [Types::CartItemType], null: false
+    field :ongoing_orders, [Types::OrderType], null: false
 
     def active_cart
       object.carts.active.first
@@ -21,6 +22,10 @@ module Types
 
     def cart_items
       active_cart&.cart_items || []
+    end
+
+    def ongoing_orders
+      object.orders.ongoing
     end
   end
 end

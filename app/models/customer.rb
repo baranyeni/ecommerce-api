@@ -8,4 +8,6 @@ class Customer < ApplicationRecord
 
   has_many :carts
   has_one :active_cart, -> { where(status: :active) }, class_name: 'Cart'
+
+  has_many :orders
 end

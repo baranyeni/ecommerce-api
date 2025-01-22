@@ -23,6 +23,8 @@ class Order < ApplicationRecord
   scope :canceled, -> { where(status: :canceled) }
   scope :completed, -> { where(status: :completed) }
 
+  scope :ongoing, -> { where(status: %i[in_payment in_shipment]) }
+
   statuses.keys.each do |status_name|
     define_method("move_to_#{status_name}!") do
       return false if status == status_name
@@ -32,7 +34,8 @@ class Order < ApplicationRecord
       true
     end
   end
-  def total_price
+
+  def current_total_price
     order_items.includes(:product).sum { |item| item.quantity * item.product.price }
   end
 end

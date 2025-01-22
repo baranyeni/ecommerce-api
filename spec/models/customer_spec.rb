@@ -24,6 +24,13 @@ RSpec.describe Customer, type: :model do
       cart = create(:cart, customer: customer)
       expect(customer.active_cart).to eq(cart)
     end
+
+    it 'has many ongoing orders' do
+      order1 = create(:order, customer: customer, status: 'in_shipment')
+      order2 = create(:order, customer: customer, status: 'in_shipment')
+
+      expect(customer.orders).to include(order1, order2)
+    end
   end
 
   describe 'validations' do

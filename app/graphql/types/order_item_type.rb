@@ -11,11 +11,11 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def order
-      Order.find(object.order_id)
+      object.order
     end
 
     def product
-      Product.find(object.product_id)
+      object.product
     end
   end
 end

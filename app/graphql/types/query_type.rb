@@ -12,6 +12,5 @@ module Types
     # Products
     field :products, resolver: Queries::Products::FetchProducts
     field :product, resolver: Queries::Products::FetchProduct
-
   end
 end
