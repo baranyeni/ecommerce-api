@@ -18,6 +18,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
+  gem 'letter_opener'
   gem 'rspec-rails'
   gem 'rubocop-rails'
 end
