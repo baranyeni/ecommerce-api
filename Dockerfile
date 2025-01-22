@@ -10,6 +10,4 @@ RUN bundle install
 
 COPY . .
 
-RUN rails db:prepare
-
 CMD ["rails", "server", "-b", "0.0.0.0"]
